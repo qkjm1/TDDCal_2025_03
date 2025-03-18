@@ -2,39 +2,46 @@ package org.exemple;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Calc {
+
     public static int run(String exp) {
+        int sum = 0;
 
-        boolean needToPlus = exp.contains("+");
-//        boolean needToMinus = exp.contains("-");
+        System.out.println("exp1 : " + exp);
 
-        String[] bits = null;
+        exp = exp.replace("- ", "+ -");
+        exp = exp.replace("- ", "- +");
+//        exp = exp.replace("+ ", "+ -");
 
-        if (needToPlus) {
-            exp= exp.replace("+", "-");
-        }
-        boolean needToMinus = exp.contains("-");
-        if (needToMinus) {
-            bits = exp.split(" - ");
-        }
-
-        int a = Integer.parseInt(bits[0]);
-        int b = Integer.parseInt(bits[1]);
-        int c = 0;
-
-        if (bits.length > 2) {
-            c = Integer.parseInt(bits[2]);
+        System.out.println("exp2 : " + exp);
+        String[] bits = new String[]{};
+        if(exp.contains("+")) {
+            bits = exp.split(" \\+ ");
+        }else if(exp.contains("*")) {
+            bits = exp.split(" \\* ");
         }
 
-        if (needToPlus) {
-            return a + b + c;
-        } else if (needToMinus) {
-            return a - b + c;
-        }
+        System.out.println("bits: " + Arrays.toString(bits));
 
-        throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
+
+        if(exp.contains("+")) {
+            for (int i = 0; i < bits.length; i++) {
+                sum += Integer.parseInt(bits[i]);
+            }
+        }else if(exp.contains("*")) {
+            sum = 1;
+            for (int j = 0; j < bits.length; j++) {
+                sum *= Integer.parseInt(bits[j]);
+            }
+        }
+        System.out.println("sum: " + sum);
+
+//        throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
+
+        return sum;
     }
-
 }
+
