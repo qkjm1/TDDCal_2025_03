@@ -52,34 +52,47 @@ public class Calc {
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
         boolean needMinus = exp.contains("-");
-        boolean needgg1 = exp.contains("(");
-//        boolean needgg2 = exp.contains(")");
+        boolean needToSplit = exp.contains("(") || exp.contains(")");
         boolean needTocom = needToMulti && needToPlus;
 
         exp = exp.replace("- ", "+ -");
-//        exp = exp.replace("(", "");
-//        exp = exp.replace(")", "");
+        exp = exp.replace("(", "");
+        exp = exp.replace(")", "");
         //        exp = exp.replace("- ", "- +");
 //        bits = exp.split(" \\+ ");
 //        bits = exp.split(" \\* ");
 //        exp = sdf(exp);
 
-
+        if (!exp.contains(" ")) {
+            return Integer.parseInt(exp);
+        }
         System.out.println("exp2 : " + exp);
         String[] bits = new String[]{};
-//        if(needgg1) {
-//            int rs =0;
-//            char[] chars = exp.toCharArray();
-//            for (int i = 0; i < chars.length; i++) {
-//                if (exp.charAt(i) == '(') {
-//                    exp = sdf(exp);
-//                    bits = String.valueOf(chars);
-//                    exp = bits[0];
-//                    rs = exp;
-//                }
-//            }
-//            return rs;
+//        if (needgg1&&needgg2) {
+//            run(exp);
+//
 //        }
+        if (needToSplit) {
+            int bracketsCount = 0;
+            int splitPointIndex = -1;
+
+            for (int i = 0; i < exp.length(); i++) {
+                if (exp.charAt(i) == '(') {
+                    bracketsCount++;
+                } else if (exp.charAt(i) == ')') {
+                    bracketsCount--;
+                }
+                if (bracketsCount == 0) {
+                    splitPointIndex = i;
+                    break;
+                }
+            }
+            String firstExp = exp.substring(0, splitPointIndex + 1);
+            String secondExp = exp.substring(splitPointIndex + 4);
+
+            return Calc.run(firstExp) + Calc.run(secondExp);
+
+        }
 
         if (needTocom){
             int sum = 0;
@@ -128,14 +141,13 @@ public class Calc {
 
     }
 
-    private static String sdf(String exp) {
-        if(exp.charAt(0) == '(' && exp.charAt(exp.length() - 1) == ')'){
-             exp = exp.substring(1, exp.length()-1);
+    private static String stripOuterBrackets(String exp) {
+        if (exp.charAt(0) == '(' && exp.charAt(exp.length() - 1) == ')') {
+            exp = exp.substring(1, exp.length() - 1);
         }
+
         return exp;
-
     }
-
 
 
 }

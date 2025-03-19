@@ -97,4 +97,16 @@ public class calcTest {
     public void test15() {
         assertThat(Calc.run("((2 + 3)) * 10")).isEqualTo(50);
     }
+
+    @Test
+    @DisplayName("10 + (10 + 5) == 15")
+    public void test16() {
+        assertThat(Calc.run("10 + (10 + 5)")).isEqualTo(25);
+    }
+
+    @Test
+    @DisplayName("-(10 + 5) == 15")
+    public void test17() {
+        assertThat(Calc.run("-(10 + 5)")).isEqualTo(-15);
+    }
 }
