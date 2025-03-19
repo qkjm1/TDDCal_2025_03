@@ -53,29 +53,34 @@ public class Calc {
         boolean needToPlus = exp.contains("+");
         boolean needMinus = exp.contains("-");
         boolean needgg1 = exp.contains("(");
-        boolean needgg2 = exp.contains(")");
+//        boolean needgg2 = exp.contains(")");
         boolean needTocom = needToMulti && needToPlus;
 
         exp = exp.replace("- ", "+ -");
-        exp = exp.replace("(", "");
-        exp = exp.replace(")", "");
+//        exp = exp.replace("(", "");
+//        exp = exp.replace(")", "");
         //        exp = exp.replace("- ", "- +");
 //        bits = exp.split(" \\+ ");
 //        bits = exp.split(" \\* ");
+//        exp = sdf(exp);
 
 
         System.out.println("exp2 : " + exp);
         String[] bits = new String[]{};
+//        if(needgg1) {
+//            int rs =0;
+//            char[] chars = exp.toCharArray();
+//            for (int i = 0; i < chars.length; i++) {
+//                if (exp.charAt(i) == '(') {
+//                    exp = sdf(exp);
+//                    bits = String.valueOf(chars);
+//                    exp = bits[0];
+//                    rs = exp;
+//                }
+//            }
+//            return rs;
+//        }
 
-        if (needgg1&&needgg2){
-            int rs = 0;
-            bits = exp.split("");
-            for (int i = 0; i < bits.length; i++) {
-                if(exp.contains("(")){
-                    rs += Integer.parseInt(bits[i]);
-                }
-            }
-        }
         if (needTocom){
             int sum = 0;
             bits = exp.split(" \\+ ");
@@ -122,5 +127,15 @@ public class Calc {
 
 
     }
+
+    private static String sdf(String exp) {
+        if(exp.charAt(0) == '(' && exp.charAt(exp.length() - 1) == ')'){
+             exp = exp.substring(1, exp.length()-1);
+        }
+        return exp;
+
+    }
+
+
 
 }
