@@ -1,5 +1,6 @@
 package org.exemple;
 
+import org.example.Calc;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -67,4 +68,33 @@ public class calcTest {
         assertThat(Calc.run("10 + 5 * 2")).isEqualTo(20);
     }
 
+    @Test
+    @DisplayName("10 * 20 + 10 + 5 * 2 == 20")
+    public void test11() {
+        assertThat(Calc.run("10 * 20 + 10 + 5 * 2")).isEqualTo(220);
+    }
+
+    @Test
+    @DisplayName("(2 + 3) == 5")
+    public void test12() {
+        assertThat(Calc.run("(2 + 3)")).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("((2 + 3)) == 5")
+    public void test13() {
+        assertThat(Calc.run("((2 + 3))")).isEqualTo(5);
+    }
+
+    @Test
+    @DisplayName("((2 + 3)) + 10 == 15")
+    public void test14() {
+        assertThat(Calc.run("((2 + 3)) + 10")).isEqualTo(15);
+    }
+
+    @Test
+    @DisplayName("((2 + 3)) * 10 == 15")
+    public void test15() {
+        assertThat(Calc.run("((2 + 3)) * 10")).isEqualTo(50);
+    }
 }
