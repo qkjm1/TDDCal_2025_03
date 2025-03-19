@@ -8,13 +8,12 @@ import java.util.List;
 public class Calc {
 
     public static int run(String exp) {
-        int sum = 0;
 
         System.out.println("exp1 : " + exp);
 
         exp = exp.replace("- ", "+ -");
         exp = exp.replace("- ", "- +");
-//        exp = exp.replace("+ ", "+ -");
+
 
         System.out.println("exp2 : " + exp);
         String[] bits = new String[]{};
@@ -28,20 +27,24 @@ public class Calc {
 
 
         if(exp.contains("+")) {
+            int sum = 0;
             for (int i = 0; i < bits.length; i++) {
+
                 sum += Integer.parseInt(bits[i]);
             }
+            return sum;
         }else if(exp.contains("*")) {
-            sum = 1;
+            int sum = 1;
             for (int j = 0; j < bits.length; j++) {
                 sum *= Integer.parseInt(bits[j]);
             }
+            return sum;
         }
         System.out.println("sum: " + sum);
 
-//        throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
+        throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
 
-        return sum;
+
     }
 }
 
