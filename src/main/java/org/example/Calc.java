@@ -533,6 +533,7 @@ public class Calc {
         exp = stripOuterBrackets(exp);
         // 만약에 -( 패턴이라면, 내가 갖고있는 코드는 해석할 수 없으므로 해석할 수 있는 형태로 수정
         int[] pos = null;
+
         while ((pos = findCaseMinusBracket(exp)) != null) {
             exp = changeMinusBracket(exp, pos[0], pos[1]);
         }
@@ -555,6 +556,7 @@ public class Calc {
         boolean needToCompound = needToMulti && needToPlus;
 
         if (needToSplit) {
+            exp = exp.replaceAll("- ", "+ -");
             int splitPointIndex = findSplitPointIndex(exp);
 
             String firstExp = exp.substring(0, splitPointIndex);
