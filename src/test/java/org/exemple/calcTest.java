@@ -118,7 +118,13 @@ public class calcTest {
     @Test
     @DisplayName("-(8 + 2) * -(7 + 3) + 5 == 80")
     public void test19() {
-        assertThat(Calc.run("-(8 + 2) * -(7 + 3) + 5")).isEqualTo(-95);
+        assertThat(Calc.run("-(8 + 2) * -(7 + 3) + 5")).isEqualTo(105);
+    }
+
+    @Test
+    @DisplayName("5 + -(8 + 2) * -(7 + 3) + 5 == 80")
+    public void test20() {
+        assertThat(Calc.run("5 + -(8 + 2) * -(7 + 3) + 5")).isEqualTo(110);
     }
 
 }
